@@ -18,10 +18,10 @@ import org.json.JSONObject;
 public class DweetStatistics {
 
 	public static void main(String[] args) {
-		String folderPath = "/Users/eugene/Documents/Programming/dweet/";
-		String outputFlatPath = "/Users/eugene/Documents/Programming/dweet/flat/";
-		String outputComplexPath = "/Users/eugene/Documents/Programming/dweet/complex/";
-		String outputEmptyPath = "/Users/eugene/Documents/Programming/dweet/empty/";
+		String folderPath = "/Users/eugene/Documents/Programming/dweet2017/";
+		String outputFlatPath = "/Users/eugene/Documents/Programming/dweet2017/flat/";
+		String outputComplexPath = "/Users/eugene/Documents/Programming/dweet2017/complex/";
+		String outputEmptyPath = "/Users/eugene/Documents/Programming/dweet2017/empty/";
 		File folder = new File(folderPath);
 		Set<String> things = new HashSet<String>();
 		Map<Integer,Integer> counter = new TreeMap<Integer,Integer>(); 
