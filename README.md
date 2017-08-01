@@ -24,6 +24,5 @@ Dictionary used for keys can be found [here](https://github.com/eugenesiow/iotde
 
 ## Datasets
 
-[Dweet.io](https://github.com/eugenesiow/iotdevices/releases/tag/v1.1)
-
-[SparkFun](https://github.com/eugenesiow/iotdevices/releases/tag/sparkfun)
+- [Dweet.io](https://github.com/eugenesiow/iotdevices/releases/tag/v1.1)
+- [SparkFun](https://github.com/eugenesiow/iotdevices/releases/tag/sparkfun)
