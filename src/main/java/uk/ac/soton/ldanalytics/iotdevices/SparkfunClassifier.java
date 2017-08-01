@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 
-public class DweetClassifier {
+public class SparkfunClassifier {
 	public static void main(String[] args) {
 		final String Digits     = "(\\p{Digit}+)";
 		final String HexDigits  = "(\\p{XDigit}+)";
@@ -52,22 +52,57 @@ public class DweetClassifier {
 			    "[\\x00-\\x20]*");// Optional trailing "whitespace"
 		Pattern p = Pattern.compile(fpRegex);
 
-		String outputClassifier = "classifier.txt";
+		String outputClassifier = "/Users/eugene/Documents/Programming/sparkfun/_classifier.txt";
 		
 		long stringCount = 0;
 		long othersCount = 0;
 		long booleanCount = 0;
 		long arrayCount = 0;
+//		
+//		String folderPath = "/Users/eugene/Documents/Programming/sparkfun/things/";
+//		File folder = new File(folderPath);
+//		try {
+//			BufferedWriter bw = new BufferedWriter(new FileWriter(outputClassifier));
+//			for(File file:folder.listFiles()) {
+//				
+//					String tempFileName = file.getName();
+//					if(tempFileName.endsWith(".json")) {
+//						JSONObject content = new JSONObject(FileUtils.readFileToString(file,"utf8"));
+//						JSONObject innermostContent = checkIsFlat(content);
+//						for(String key:innermostContent.keySet()) {
+//							Object val = innermostContent.get(key);
+//							if(val instanceof String) {
+//								bw.append(key+"||"+val+"\n");
+//							} else if(val instanceof Boolean) {
+//								booleanCount++;
+//							} else if(val instanceof JSONArray) {
+//								arrayCount++;
+//							}
+//							else {
+//	//							System.out.println(key + ":" + val);
+//								othersCount++;
+//							}
+//						}
+//					}
+//				
+//			}	
+//			bw.flush();
+//			bw.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("strings:"+stringCount+" bool:"+booleanCount+" array:"+arrayCount+" others:"+othersCount);
 		
-		booleanCount = 122; //these were calculated previously TODO: add them dynamically
-		arrayCount = 93;
-		othersCount = 40790;
+		booleanCount = 0;
+		arrayCount = 0;
+		othersCount = 4;
+		long timestampCount = 0;
 		long idCount = 0;
 		long categoricalCount = 0;
 		long testCount = 0;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(outputClassifier));
-			String keycount = "_keylist.txt";
+			String keycount = "/Users/eugene/Documents/Programming/sparkfun/_keylist.txt";
 			BufferedWriter bw = new BufferedWriter(new FileWriter(keycount));
 			String line = "";
 			while((line=br.readLine())!=null) {
@@ -78,7 +113,9 @@ public class DweetClassifier {
 					Matcher m = p.matcher(s);
 					if (m.matches()){
 						othersCount++;
-					} else if(key.toLowerCase().contains("date") || key.toLowerCase().equals("ip") || key.toLowerCase().contains("time") || key.toLowerCase().contains("last")|| key.toLowerCase().contains("temperature") || key.toLowerCase().contains("level")|| key.toLowerCase().equals("ifconfig")) {
+					} else if(key.toLowerCase().contains("time")) {
+						timestampCount++;
+					} else if(key.toLowerCase().contains("date") || key.toLowerCase().equals("ip") || key.toLowerCase().contains("last")|| key.toLowerCase().contains("temperature") || key.toLowerCase().contains("level")|| key.toLowerCase().equals("ifconfig")) {
 						othersCount++;
 					} else if(s.toLowerCase().contains("mon") || s.toLowerCase().contains("jan") || s.contains("2016")) {
 						othersCount++;
@@ -119,7 +156,7 @@ public class DweetClassifier {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("strings:"+stringCount+"\nbool:"+booleanCount+"\narray:"+arrayCount+"\ncategorical:"+categoricalCount+"\ntest:"+testCount+"\nid:"+idCount+"\nothers:"+othersCount);
+		System.out.println("timestamp:"+timestampCount+"\nstrings:"+stringCount+"\nbool:"+booleanCount+"\narray:"+arrayCount+"\ncategorical:"+categoricalCount+"\ntest:"+testCount+"\nid:"+idCount+"\nothers:"+othersCount);
 		
 	}
 	
