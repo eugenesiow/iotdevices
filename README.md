@@ -21,3 +21,8 @@ Dictionary used for keys can be found [here](https://github.com/eugenesiow/iotde
 ## Cross-IoT Study
 
 [Get Array of Things Data](https://github.com/eugenesiow/iotdevices/tree/master/array_of_things)
+
+## Datasets
+
+[Dweet.io](https://github.com/eugenesiow/iotdevices/releases/tag/v1.1)
+[SparkFun](https://github.com/eugenesiow/iotdevices/releases/tag/sparkfun)
