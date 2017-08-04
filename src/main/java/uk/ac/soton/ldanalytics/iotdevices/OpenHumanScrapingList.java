@@ -33,8 +33,8 @@ public class OpenHumanScrapingList {
 							String downloadUrl = result.getString("download_url");
 							String baseName = result.getString("basename");
 							String id = result.getInt("id") + "";
-							String data = Jsoup.connect(downloadUrl).ignoreContentType(true).execute().body();
-							FileUtils.writeStringToFile(new File(outputPath + "data/"+ id + baseName), data, 	StandardCharsets.UTF_8);
+							String data = Jsoup.connect(downloadUrl).ignoreContentType(true).maxBodySize(0).execute().body();
+							FileUtils.writeStringToFile(new File(outputPath + "data/"+ id + "_" + baseName), data, 	StandardCharsets.UTF_8);
 						}
 						String next = page.get("next").toString();
 						if(!next.equals("null")) {

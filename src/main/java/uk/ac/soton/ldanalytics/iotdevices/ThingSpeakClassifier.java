@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,8 @@ public class ThingSpeakClassifier {
 		int numerical = 0;
 		int other = 0;
 		int nullVal = 0;
+		String[] dictionary = {"voltage","pressure","current","light","moisture","capacidad","ldr","power"};
+		List<String> dictionaryList = Arrays.asList(dictionary);
 		final String Digits     = "(\\p{Digit}+)";
 		final String HexDigits  = "(\\p{XDigit}+)";
 		// an exponent is 'e' or 'E' followed by an optionally 
@@ -81,9 +85,14 @@ public class ThingSpeakClassifier {
 								} else {
 //									System.out.println(feed.get(key));
 									if(value.equals("") || value.equals("null") || value.contains("NA") || value.contains("N/A")) {
-										nullVal++;
-										bw.append(channel.getString(key));
-										bw.newLine();
+										String fieldKey = channel.getString(key).trim().toLowerCase();
+										if(dictionaryList.contains(fieldKey) || fieldKey.contains("temp") || fieldKey.contains("hum") ||  fieldKey.contains("count") || fieldKey.contains("time") || fieldKey.contains("point")) {
+											numerical++;
+										} else {
+											nullVal++;
+											bw.append(fieldKey);
+											bw.newLine();
+										}
 									}
 									else
 										other++;
